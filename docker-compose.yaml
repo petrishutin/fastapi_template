@@ -1,0 +1,29 @@
+version: "3"
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    command: [ "/bin/bash", "/wait-for-it.sh", "redis:6379", "--", "/entrypoint.sh" ]
+    ports:
+      - "8000:8000"
+    depends_on:
+      - pg
+      - redis
+
+  redis:
+    image: redis:alpine
+    env_file:
+      - .env
+    ports:
+      - "20000:6379"
+    depends_on:
+      - pg
+
+  pg:
+    image: postgres:13.3
+    env_file:
+      - .env
+    ports:
+      - "30000:5432"
