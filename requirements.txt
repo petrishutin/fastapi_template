@@ -1,7 +1,5 @@
-FastAPI
+fastapi>=0.95.1
 uvicorn
-pydantic[dotenv]
-pytest
-redis
-requests
-psycopg2-binary
+pydantic[dotenv]~=1.10.6
+httpx>=0.24.0
+python-multipart
